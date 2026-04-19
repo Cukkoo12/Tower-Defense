@@ -803,14 +803,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 6
-  jumpingPower: 16
+  jumpingPower: 12
   wallSlidingSpeed: 2
-  wallJumpingPower: {x: 10, y: 16}
+  wallJumpingPower: {x: 10, y: 12}
   wallJumpingTime: 0.2
   wallJumpingDuration: 0.25
   groundCheck: {fileID: 2033131927}
   wallCheck: {fileID: 416243758}
-  groundCheckRadius: 0.2
+  groundCheckRadius: 0.1
   wallCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
@@ -1064,7 +1064,7 @@ Transform:
   m_GameObject: {fileID: 2033131926}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.1, z: 0}
+  m_LocalPosition: {x: -0.177, y: -1.259, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

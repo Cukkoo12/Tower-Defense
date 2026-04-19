@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
-
+    private SpriteRenderer sr;
     private float horizontal;
     private bool isFacingRight = true;
 
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -71,6 +72,14 @@ public class PlayerController : MonoBehaviour
 
     private void WallSlide()
     {
+        // DÜZELTME 1: Eðer karakter halihazýrda duvardan dýþarý sekiyorsa, 
+        // tekrar duvara sürtünmesini ve zýplamayý iptal etmesini engelle.
+        if (isWallJumping)
+        {
+            isWallSliding = false;
+            return;
+        }
+
         if (IsWalled() && !IsGrounded() && horizontal != 0f)
         {
             isWallSliding = true;
@@ -87,7 +96,9 @@ public class PlayerController : MonoBehaviour
         if (isWallSliding)
         {
             isWallJumping = false;
-            wallJumpingDirection = -transform.localScale.x;
+            // DÜZELTME 2: Karakterin boyutu (Scale) deðiþirse zýplama gücünün bozulmamasý için 
+            // sadece yönünü (1 veya -1) almak adýna Mathf.Sign kullandýk.
+            wallJumpingDirection = -Mathf.Sign(transform.localScale.x);
             wallJumpingCounter = wallJumpingTime;
             CancelInvoke(nameof(StopWallJumping));
         }
@@ -132,14 +143,24 @@ public class PlayerController : MonoBehaviour
     {
         if (animLocked || animator == null) return;
 
-        Debug.Log($"[Anim] WallSlide:{isWallSliding} | Grounded:{IsGrounded()} | Walled:{IsWalled()} | H:{horizontal}");
-
         string state;
-        // ... (geri kalan ayný)
-        if (isWallSliding) state = "WallSlide";
-        else if (!IsGrounded()) state = rb.linearVelocity.y > 0.1f ? "Jump" : "Fall";
-        else if (Mathf.Abs(rb.linearVelocity.x) > 0.1f) state = "Run";
-        else state = "Idle";
+
+        if (isWallSliding)
+        {
+            state = "WallSlide";
+            // Sadece duvarda kayarken karakter görselini ters çeviriyoruz.
+            // Bu sayede fiziksel yönü bozulmuyor, ama elleri duvara oturuyor.
+            if (sr != null) sr.flipX = true;
+        }
+        else
+        {
+            // Duvardan koptuðu an görseli standart haline geri getiriyoruz.
+            if (sr != null) sr.flipX = false;
+
+            if (!IsGrounded()) state = rb.linearVelocity.y > 0.1f ? "Jump" : "Fall";
+            else if (Mathf.Abs(rb.linearVelocity.x) > 0.1f) state = "Run";
+            else state = "Idle";
+        }
 
         PlayState(state);
     }
