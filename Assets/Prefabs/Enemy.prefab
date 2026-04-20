@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3921129280177658194}
   - component: {fileID: 8558528061727291107}
   - component: {fileID: 8598265801206701550}
+  - component: {fileID: 6381671899793631328}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -84,12 +85,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2086149939600825950, guid: 374a0c019c318d7439d3de4165477da3, type: 3}
+  m_Sprite: {fileID: 4723107735738678597, guid: 2b8b67fbac4ad49459324354101bd3e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.9375, y: 3.3125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -155,17 +156,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.21133333}
+  m_Offset: {x: -0.09522727, y: -0.0053910613}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.2}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 1.46875, y: 1.65625}
+    newSize: {x: 2.9375, y: 3.3125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.80954546, y: 1.6436056}
   m_EdgeRadius: 0
 --- !u!114 &8598265801206701550
 MonoBehaviour:
@@ -181,6 +182,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   moveSpeed: 2
   maxHealth: 30
-  damageToTower: 10
+  attackDamage: 10
   goldReward: 5
   attackRate: 1
+  playerDetectionRange: 4
+  deathAnimDuration: 0.8
+--- !u!95 &6381671899793631328
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6101035367248436754}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3cf1ac3c14fed264b817dce70b8f76fc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
